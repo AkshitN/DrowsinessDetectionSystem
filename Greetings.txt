@@ -5,3 +5,5 @@ to check merge from br2.
 Again editing br1 in order to check the difference between pull and merge.
 new commit corresponding to R1-2020_Clover_New.
 Conlfict testing!!!!!!!!!!
+Resolution for conflicts.
+
