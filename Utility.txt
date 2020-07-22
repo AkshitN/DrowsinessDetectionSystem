@@ -1,0 +1,109 @@
+package co.lti;
+
+import java.lang.reflect.Method;
+import java.io.FileWriter;
+import java.lang.reflect.Modifier;
+
+public class Reflected {
+
+	public static void main(String[] args) {
+		
+		FileWriter fw;
+		
+		Class reflectClass= POJO.class;
+		
+		String cn=reflectClass.getName();
+		String className=cn.substring(7,11);
+		char first=className.toLowerCase().charAt(0);
+		String classNameVariable=first+className.substring(1,className.length())+"WhiteBoxTester";
+		
+		Method[] method= reflectClass.getDeclaredMethods();
+		
+		String variables[]= new String[method.length]; 
+		int varCount=0;
+		
+		for(Method i:method)
+		{
+			if(Modifier.isPublic(i.getModifiers()))
+			{
+				//System.out.println(i);
+				String arr[]=i.toString().split("\\W");
+				int functionLength=arr.length;
+				String last=arr[functionLength-1];
+				
+				
+				if(last.substring(0,3).equals("get"))
+				{
+					variables[varCount]=last.substring(3, last.length());
+					varCount++;
+				}
+			}
+		}
+		
+		/*System.err.println("List of Variables:");*/
+		
+		
+		
+		try
+		{
+			fw= new FileWriter("G:\\VOTestNG.txt",true);
+			fw.write("System.out.println(\"Start Test Cases for com.tietoenator.lisnordeafi.ui.management.form."+className+"\");"
+					+ "\n"
+			+"try {" + "\n"+ 
+			"com.nordea.nlfi.WhiteBoxTester<com.tietoenator.lis.ui.management.form."+className+"> "+classNameVariable+";"
+			+ "\n"
+			+classNameVariable+" = new com.nordea.nlfi.WhiteBoxTester<com.tietoenator.lis.ui.management.form."+className
+			+">(com.tietoenator.lis.ui.management.form."+className+");"
+			+ "\n"
+			+ "\n");
+		for(String i:variables)
+		{
+			if(i==null)
+			{
+				continue;
+			}
+			else
+			{
+					char ch=i.toLowerCase().charAt(0);
+					String var=ch+i.substring(1,i.length());
+					fw.write(classNameVariable+".testGetter(\"" +var+ "\");" + "\n");
+					
+			}
+		}
+		
+		fw.write("\n");
+		
+		for(String i:variables)
+		{
+			if(i==null)
+			{
+				continue;
+			}
+			else
+			{
+					char ch=i.toLowerCase().charAt(0);
+					String var=ch+i.substring(1,i.length());
+					fw.write(classNameVariable+".testSetter(\"" +var+ "\");" + "\n");
+					
+			}
+		}
+		
+		fw.write("\n");
+		
+		fw.write(
+				 classNameVariable+".testEqualsWhenNull();"+"\n"
+		+        classNameVariable+".testEqualsWhenSameObject();"+"\n"
+		+		 classNameVariable+".testEqualsWhenDifferentClassObject();"+"\n"
+		+		 "}catch(Exception e){"+ "\n"
+		+		 "\t System.out.println(\"Error in com.tietoenator.lis.ui.management.form."+className+"\");"+"\n"
+		+        "}"+"\n"
+		+        "// End Test Cases for com.tietoenator.lis.ui.management.form."+className +"\n"
+		+        "System.out.println(\"End Test Cases for com.tietoenator.lis.ui.management.form."+className+"\");"+"\n"
+				);
+		
+		
+		fw.close();	
+		}catch(Exception e)
+		{System.out.println(e);}
+	}
+}

@@ -1,0 +1,66 @@
+package co.lti;
+
+public class POJO {
+
+	private int coverAmount;
+	private int age;
+	private String concise;
+	private String comprehensive;
+	private String complex;
+	private String online;
+	private int premium;
+	private int date;
+	
+	//Getter-Setter methods
+	
+	public int getCoverAmount() {
+		return coverAmount;
+	}
+	public void setCoverAmount(int coverAmount) {
+		this.coverAmount = coverAmount;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getConcise() {
+		return concise;
+	}
+	public void setConcise(String concise) {
+		this.concise = concise;
+	}
+	public String getComprehensive() {
+		return comprehensive;
+	}
+	public void setComprehensive(String comprehensive) {
+		this.comprehensive = comprehensive;
+	}
+	public String getComplex() {
+		return complex;
+	}
+	public void setComplex(String complex) {
+		this.complex = complex;
+	}
+	public String getOnline() {
+		return online;
+	}
+	public void setOnline(String online) {
+		this.online = online;
+	}
+	public int getPremium() {
+		return premium;
+	}
+	public void setPremium(int premium) {
+		this.premium = premium;
+	}
+	public int getDate() {
+		return date;
+	}
+	public void setDate(int date) {
+		this.date = date;
+	}
+	
+	
+}
